@@ -11,6 +11,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -26,10 +27,10 @@ function App() {
         setIsLoading(false);
       }
     }
-    // if (query.length < 3) {
-    //   setCharacters([]);
-    //   return;
-    // }
+    if (query.length < 3) {
+      setCharacters([]);
+      return;
+    }
     fetchData();
   }, [query]);
 
@@ -56,6 +57,9 @@ function App() {
   //     .then((res) => res.json())
   //     .then((data) => setCharacters(data.results.slice(0, 8)));
   // }, []);
+  const handleSelectCharacter = (id) => {
+    setSelectedId(id);
+  };
 
   return (
     <div className="app">
@@ -66,8 +70,12 @@ function App() {
       </Navbar>
       <div className="main">
         <Main characters={characters}>
-          <CharacterList characters={characters} isLoading={isLoading} />
-          <CharacterDetail />
+          <CharacterList
+            characters={characters}
+            isLoading={isLoading}
+            onSelectCharacter={handleSelectCharacter}
+          />
+          <CharacterDetail selectedId={selectedId} />
         </Main>
       </div>
     </div>
