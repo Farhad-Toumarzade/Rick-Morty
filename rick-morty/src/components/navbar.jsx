@@ -6,7 +6,6 @@ export default function Navbar({ children }) {
       <Logo />
 
       {children}
-      <Favourites />
     </nav>
   );
 }
@@ -29,11 +28,11 @@ export function Search({ query, setQuery }) {
 export function SearchResult({ numOfResult }) {
   return <div className="navbar__result">found {numOfResult} charactors</div>;
 }
-export function Favourites() {
+export function Favourites({ numOffavourites }) {
   return (
     <button className="heart">
       <HeartIcon className="icon" />
-      <span className="badge">4</span>
+      <span className="badge">{numOffavourites}</span>
     </button>
   );
 }
