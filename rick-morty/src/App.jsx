@@ -65,7 +65,6 @@ function App() {
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
   };
-
   const isAddToFavourite = favourites.map((fav) => fav.id).includes(selectedId);
 
   return (
@@ -74,7 +73,7 @@ function App() {
       <Navbar>
         <Search query={query} setQuery={setQuery} />
         <SearchResult numOfResult={characters.length} />
-        <Favourites numOffavourites={favourites.length} />
+        <Favourites favourites={favourites} />
       </Navbar>
       <div className="main">
         <Main characters={characters}>
@@ -82,6 +81,7 @@ function App() {
             characters={characters}
             isLoading={isLoading}
             onSelectCharacter={handleSelectCharacter}
+            selectedId={selectedId}
           />
           <CharacterDetail
             selectedId={selectedId}
