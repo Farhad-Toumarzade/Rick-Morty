@@ -31,14 +31,17 @@ export function Search({ query, setQuery }) {
 export function SearchResult({ numOfResult }) {
   return <div className="navbar__result">found {numOfResult} charactors</div>;
 }
-export function Favourites({ favourites }) {
+export function Favourites({ favourites, onDeleteFavourite }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Modal onOpen={setIsOpen} open={isOpen} title="List Of Favourites">
         {favourites.map((item) => (
           <Character key={item.id} item={item}>
-            <button className="icon red">
+            <button
+              className="icon red"
+              onClick={() => onDeleteFavourite(item.id)}
+            >
               <TrashIcon />
             </button>
           </Character>
